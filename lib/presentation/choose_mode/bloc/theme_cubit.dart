@@ -8,22 +8,11 @@ class ThemeCubit extends HydratedCubit<ThemeMode> {
 
   @override
   ThemeMode? fromJson(Map<String, dynamic> json) {
-    // // TODO: implement fromJson
-    // throw UnimplementedError();
-    try {
-      final themeString = json['theme'] as String;
-      return ThemeMode.values.firstWhere((e) => e.toString() == themeString);
-    } catch (_) {
-      return null; // Trường hợp không thể khôi phục trạng thái
-    }
+    return ThemeMode.values[json['theme'] as int];
   }
 
   @override
   Map<String, dynamic>? toJson(ThemeMode state) {
-    // // TODO: implement toJson
-    // throw UnimplementedError();
-    return {
-      'theme': state.toString(),
-    };
+    return {'theme': state.index};
   }
 }

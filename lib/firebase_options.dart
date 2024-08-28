@@ -46,6 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '472380581400',
     projectId: 'spotify-3ad39',
     authDomain: 'spotify-3ad39.firebaseapp.com',
+    databaseURL: 'https://spotify-3ad39-default-rtdb.firebaseio.com',
     storageBucket: 'spotify-3ad39.appspot.com',
     measurementId: 'G-EFDY2JKP7G',
   );
@@ -55,6 +56,7 @@ class DefaultFirebaseOptions {
     appId: '1:472380581400:android:4a290abd922b1433af856d',
     messagingSenderId: '472380581400',
     projectId: 'spotify-3ad39',
+    databaseURL: 'https://spotify-3ad39-default-rtdb.firebaseio.com',
     storageBucket: 'spotify-3ad39.appspot.com',
   );
 
@@ -63,6 +65,7 @@ class DefaultFirebaseOptions {
     appId: '1:472380581400:ios:532e8f2a693b0faeaf856d',
     messagingSenderId: '472380581400',
     projectId: 'spotify-3ad39',
+    databaseURL: 'https://spotify-3ad39-default-rtdb.firebaseio.com',
     storageBucket: 'spotify-3ad39.appspot.com',
     iosBundleId: 'com.example.spotify',
   );
@@ -72,6 +75,7 @@ class DefaultFirebaseOptions {
     appId: '1:472380581400:ios:532e8f2a693b0faeaf856d',
     messagingSenderId: '472380581400',
     projectId: 'spotify-3ad39',
+    databaseURL: 'https://spotify-3ad39-default-rtdb.firebaseio.com',
     storageBucket: 'spotify-3ad39.appspot.com',
     iosBundleId: 'com.example.spotify',
   );
@@ -82,6 +86,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '472380581400',
     projectId: 'spotify-3ad39',
     authDomain: 'spotify-3ad39.firebaseapp.com',
+    databaseURL: 'https://spotify-3ad39-default-rtdb.firebaseio.com',
     storageBucket: 'spotify-3ad39.appspot.com',
     measurementId: 'G-9DPDHPLS0Z',
   );

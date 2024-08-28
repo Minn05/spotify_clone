@@ -8,7 +8,7 @@ import 'package:spotify/domain/usecases/auth/signup.dart';
 import 'package:spotify/presentation/auth/pages/signin.dart';
 
 import '../../../service_locator.dart';
-import '../../root/pages/root.dart';
+import '../../home/pages/home.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
@@ -72,7 +72,7 @@ class SignUpPage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      const RootPage()),
+                                      const HomePage()),
                               (route) => false);
                         },
                       );
