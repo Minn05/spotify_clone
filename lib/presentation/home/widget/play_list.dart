@@ -5,6 +5,7 @@ import 'package:spotify/core/configs/themes/app_colors.dart';
 import 'package:spotify/domain/entities/song/song_entity.dart';
 import 'package:spotify/presentation/home/bloc/play_list_cubit.dart';
 import 'package:spotify/presentation/home/bloc/play_list_state.dart';
+import 'package:spotify/presentation/song_player/pages/song_player.dart';
 
 class PlayList extends StatelessWidget {
   const PlayList({super.key});
@@ -60,67 +61,79 @@ class PlayList extends StatelessWidget {
     return ListView.separated(
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: 45,
-                width: 45,
-                transform: Matrix4.translationValues(10, 10, 0),
-                decoration: BoxDecoration(
-                  color: context.isDarkMode
-                      ? AppColors.darkGrey
-                      : const Color(0xffE6E6E6),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.play_arrow_rounded,
-                  color: context.isDarkMode
-                      ? const Color(0xff959595)
-                      : const Color(0xff555555),
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: SizedBox(
-                  width: 150,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        songs[index].title,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        songs[index].artist,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 12),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => SongPlayer(
+                            songEntity: songs[index],
+                          )));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 45,
+                  width: 45,
+                  transform: Matrix4.translationValues(10, 10, 0),
+                  decoration: BoxDecoration(
+                    color: context.isDarkMode
+                        ? AppColors.darkGrey
+                        : const Color(0xffE6E6E6),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.play_arrow_rounded,
+                    color: context.isDarkMode
+                        ? const Color(0xff959595)
+                        : const Color(0xff555555),
                   ),
                 ),
-              ),
-              const Spacer(),
-              Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: Text(songs[index]
-                      .duration
-                      .toStringAsFixed(2)
-                      .replaceAll('.', ':'))),
-              IconButton(
+                const SizedBox(
+                  width: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: SizedBox(
+                    width: 150,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          songs[index].title,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          songs[index].artist,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w400, fontSize: 12),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Text(songs[index]
+                        .duration
+                        .toStringAsFixed(2)
+                        .replaceAll('.', ':'))),
+                IconButton(
                   onPressed: () {},
                   icon: const Icon(
-                    Icons.favorite_rounded,
+                    Icons.favorite_outline,
+                    size: 30,
                     color: AppColors.darkGrey,
-                  ))
-            ],
+                  ),
+                ),
+              ],
+            ),
           );
         },
         separatorBuilder: (context, index) => const SizedBox(
