@@ -9,12 +9,13 @@ import 'package:spotify/domain/entities/song/song_entity.dart';
 import 'package:spotify/presentation/song_player/bloc/song_player_cubit.dart';
 import 'package:spotify/presentation/song_player/bloc/song_player_state.dart';
 
-class SongPlayer extends StatelessWidget {
+// ignore: must_be_immutable
+class SongPlayerPage extends StatelessWidget {
   SongEntity songEntity;
-  SongPlayer({
-    Key? key,
+  SongPlayerPage({
+    super.key,
     required this.songEntity,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +36,23 @@ class SongPlayer extends StatelessWidget {
               '${AppUrl.songFirestorage}${songEntity.title}-${songEntity.artist}.mp3?${AppUrl.mediaAlt}'),
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Column(children: [
-            _songCover(context),
-            const SizedBox(
-              height: 30,
-            ),
-            _songDetail(context),
-            const SizedBox(
-              height: 30,
-            ),
-            _songPlayer(context),
-          ]),
+          child: Builder(
+            builder: (context) {
+              return Column(
+                children: [
+                  _songCover(context),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  _songDetail(context),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  _songPlayer(context),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
@@ -97,69 +104,70 @@ class SongPlayer extends StatelessWidget {
 
   Widget _songPlayer(BuildContext context) {
     return BlocBuilder<SongPlayerCubit, SongPlayerState>(
-        builder: (context, state) {
-      if (state is SongPlayerLoading) {
-        return Container(
-            alignment: Alignment.center,
-            child: const CircularProgressIndicator());
-      }
+      builder: (context, state) {
+        if (state is SongPlayerLoading) {
+          return Container(
+              alignment: Alignment.center,
+              child: const CircularProgressIndicator());
+        }
 
-      if (state is SongPlayerLoaded) {
-        return Column(
-          children: [
-            Slider(
-              value: context
-                  .read<SongPlayerCubit>()
-                  .songPosition
-                  .inSeconds
-                  .toDouble(),
-              min: 0.0,
-              max: context
-                  .read<SongPlayerCubit>()
-                  .songDuration
-                  .inSeconds
-                  .toDouble(),
-              onChanged: (value) {},
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(fomartDuration(
-                    context.read<SongPlayerCubit>().songPosition)),
-                Text(fomartDuration(
-                    context.read<SongPlayerCubit>().songDuration)),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            GestureDetector(
-              onTap: () {
-                context.read<SongPlayerCubit>().playOrPauseSong();
-              },
-              child: Container(
-                height: 60,
-                width: 60,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.primary,
-                ),
-                child: Icon(
-                  context.read<SongPlayerCubit>().audioPlayer.playing
-                      ? Icons.pause
-                      : Icons.play_arrow,
+        if (state is SongPlayerLoaded) {
+          return Column(
+            children: [
+              Slider(
+                value: context
+                    .read<SongPlayerCubit>()
+                    .songPosition
+                    .inSeconds
+                    .toDouble(),
+                min: 0.0,
+                max: context
+                    .read<SongPlayerCubit>()
+                    .songDuration
+                    .inSeconds
+                    .toDouble(),
+                onChanged: (value) {},
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(fomartDuration(
+                      context.read<SongPlayerCubit>().songPosition)),
+                  Text(fomartDuration(
+                      context.read<SongPlayerCubit>().songDuration)),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {
+                  context.read<SongPlayerCubit>().playOrPauseSong();
+                },
+                child: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.primary,
+                  ),
+                  child: Icon(
+                    context.read<SongPlayerCubit>().audioPlayer.playing
+                        ? Icons.pause
+                        : Icons.play_arrow,
+                  ),
                 ),
               ),
-            ),
-          ],
-        );
-      }
+            ],
+          );
+        }
 
-      return Container();
-    });
+        return Container();
+      },
+    );
   }
 
   String fomartDuration(Duration duration) {

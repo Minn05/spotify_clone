@@ -20,7 +20,6 @@ class PlayListCubit extends Cubit<PlayListState> {
         emit(
           PlayListLoaded(songs: data),
         );
-        print(data);
       },
     );
   }

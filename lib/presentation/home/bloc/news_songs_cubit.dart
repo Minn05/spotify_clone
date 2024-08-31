@@ -20,7 +20,6 @@ class NewsSongsCubit extends Cubit<NewsSongsState> {
         emit(
           NewsSongsLoaded(songs: data),
         );
-        print(data);
       },
     );
   }
