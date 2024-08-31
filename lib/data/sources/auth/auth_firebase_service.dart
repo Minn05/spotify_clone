@@ -43,7 +43,8 @@ class AuthFirebaseServiceIml extends AuthFirebaseService {
 
       FirebaseFirestore.instance
           .collection('User')
-          .add({'name': createUserReq.fullName, 'email': data.user?.email});
+          .doc(data.user?.uid)
+          .set({'name': createUserReq.fullName, 'email': data.user?.email});
 
       return const Right('Sign Up  Was Successfull');
     } on FirebaseAuthException catch (e) {
