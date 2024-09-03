@@ -6,6 +6,7 @@ import 'package:spotify/common/widgets/favourite_button/favourite_buton.dart';
 import 'package:spotify/core/configs/constants/app_urls.dart';
 import 'package:spotify/core/configs/themes/app_colors.dart';
 import 'package:spotify/domain/entities/song/song_entity.dart';
+import 'package:spotify/presentation/profile/bloc/favourite_song_cubit.dart';
 import 'package:spotify/presentation/song_player/bloc/song_player_cubit.dart';
 import 'package:spotify/presentation/song_player/bloc/song_player_state.dart';
 
@@ -97,6 +98,10 @@ class SongPlayerPage extends StatelessWidget {
         ),
         FavouriteButton(
           songEntity: songEntity,
+          key: UniqueKey(),
+          function: () {
+            context.read()<FavouriteSongsCubit>().removeSong(context);
+          },
         ),
       ],
     );

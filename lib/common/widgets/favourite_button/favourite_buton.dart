@@ -7,7 +7,8 @@ import 'package:spotify/domain/entities/song/song_entity.dart';
 
 class FavouriteButton extends StatelessWidget {
   final SongEntity songEntity;
-  const FavouriteButton({super.key, required this.songEntity});
+  final Function? function;
+  const FavouriteButton({super.key, required this.songEntity, this.function});
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +18,13 @@ class FavouriteButton extends StatelessWidget {
         builder: (context, state) {
           if (state is FavouriteButtonInitial) {
             return IconButton(
-              onPressed: () {
-                context
+              onPressed: () async {
+                await context
                     .read<FavouriteButtonCubit>()
                     .favouriteButtonUpdate(songEntity.songId);
+                if (function != null) {
+                  function!();
+                }
               },
               icon: Icon(
                 songEntity.isFavourite

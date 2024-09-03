@@ -6,6 +6,7 @@ import 'package:spotify/core/configs/themes/app_colors.dart';
 import 'package:spotify/domain/entities/song/song_entity.dart';
 import 'package:spotify/presentation/home/bloc/play_list_cubit.dart';
 import 'package:spotify/presentation/home/bloc/play_list_state.dart';
+import 'package:spotify/presentation/profile/bloc/favourite_song_cubit.dart';
 import 'package:spotify/presentation/song_player/pages/song_player.dart';
 
 class PlayList extends StatelessWidget {
@@ -74,6 +75,7 @@ class PlayList extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                //icon
                 Container(
                   height: 45,
                   width: 45,
@@ -94,6 +96,7 @@ class PlayList extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
+                //name of song and artist
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: SizedBox(
@@ -119,6 +122,8 @@ class PlayList extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
+
+                //time
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: Text(
@@ -130,6 +135,10 @@ class PlayList extends StatelessWidget {
                 ),
                 FavouriteButton(
                   songEntity: songs[index],
+                  key: UniqueKey(),
+                  function: () {
+                    context.read()<FavouriteSongsCubit>().removeSong(index);
+                  },
                 ),
               ],
             ),

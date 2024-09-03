@@ -6,7 +6,7 @@ import 'package:spotify/service_locator.dart';
 class FavouriteButtonCubit extends Cubit<FavouriteButtonState> {
   FavouriteButtonCubit() : super(FavouriteButtonInitial());
 
-  void favouriteButtonUpdate(String songId) async {
+  Future<void> favouriteButtonUpdate(String songId) async {
     var result = await sl<AddOrRemoveFavouriteSongsUseCase>().call(
       params: songId,
     );

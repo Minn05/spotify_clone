@@ -5,6 +5,7 @@ import 'package:spotify/core/configs/assets/app_images.dart';
 import 'package:spotify/core/configs/themes/app_colors.dart';
 import 'package:spotify/presentation/home/widget/news_songs.dart';
 import 'package:spotify/presentation/home/widget/play_list.dart';
+import 'package:spotify/presentation/profile/pages/profile.dart';
 
 import '../../../common/widgets/appbar/app_bar.dart';
 import '../../../core/configs/assets/app_vectors.dart';
@@ -35,6 +36,17 @@ class _HomePageState extends State<HomePage>
           AppVectors.logo,
           height: 40,
           width: 40,
+        ),
+        action: IconButton(
+          icon: const Icon(Icons.person),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => const ProfilePage(),
+              ),
+            );
+          },
         ),
       ),
       body: SingleChildScrollView(
